@@ -1115,7 +1115,11 @@ def resolve_paths(entry, cwd):
     """
     # replace any special AT_FDCWD arg value with the cwd value
     for idx, arg in enumerate(entry.args):
-        entry.args[idx] = cwd if arg == "AT_FDCWD" else arg
+        # check for "AT_FDCWD<path>" values
+        if arg.startswith("AT_FDCWD<"):
+            entry.args[idx] = arg[9:-1]
+        else:
+            entry.args[idx] = cwd if arg == "AT_FDCWD" else arg
 
     # resolve paths for calls that only use CWD
     if entry.func in PATH_ARGS:
