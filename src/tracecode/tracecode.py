@@ -2435,6 +2435,7 @@ Usage:
  tracecode [options] analyze   PARSED_DIR  ANALYSIS_FILE
  tracecode [options] graphic   PARSED_DIR  GRAPH_FILE
  tracecode [options] guess     PARSED_DIR  SOURCES_FILE  TARGETS_FILE
+ tracecode [options] dump      PARSED_DIR  DUMP_FILE
  tracecode [options] debug     PARSED_DIR
  tracecode [options] debugg    PARSED_DIR
  tracecode [options] validate  TRACE_DIR
