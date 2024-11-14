@@ -1035,11 +1035,17 @@ def resolve_descriptors(entry, check_num=False):
     """
     warn = False
     try:
-        for pos in FDESC_ARGS[entry.func]:
-            if check_num and entry.args[pos].isdigit():
-                warn = True
-            desc = decode_descriptor(entry.args[pos])
-            entry.args[pos] = desc
+        # if dup2/dup3 succeed use simply the original description
+        if entry.func in ["dup2","dup3"] and entry.result != "-1":
+            desc = decode_descriptor(entry.args[0])
+            entry.args[0] = desc
+            entry.args[1] = desc
+        else:
+            for pos in FDESC_ARGS[entry.func]:
+                if check_num and entry.args[pos].isdigit():
+                    warn = True
+                desc = decode_descriptor(entry.args[pos])
+                entry.args[pos] = desc
     except KeyError:
         pass
     return warn
