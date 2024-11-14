@@ -1271,7 +1271,7 @@ class Process(object):
         ppid = self.ppid
         tstamp = self.tstamp
         execs = ", ".join(c.command for c in self.execs)
-
+        args = "\"{}\"".format( "\" \"".join(self.execs[-1].args) )
         indent = "  "
         reads = "\n".join(indent + f for f in self.as_sorted_paths(self.reads))
         writes = "\n".join(
@@ -1290,6 +1290,7 @@ class Process(object):
                              for f in self.as_sorted_paths(self.children))
         rep = (
             """Process: pid=%(pid)r, ppid=%(ppid)r, execs=%(execs)r, tstamp=%(tstamp)s:
+Args: %(args)s
  Reads:
 %(reads)s
  Writes:
