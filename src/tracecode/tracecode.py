@@ -733,8 +733,8 @@ def parse_line(line, process, settings):
 
         if has_read_flag(oflags):
             # TODO: for now we pass, so we could track this too ....
-            # process.add_read(e.args[0], e.tstamp, settings.ignored_reads)
-            pass
+            process.add_read(e.args[0], e.tstamp, settings.ignored_reads)
+            #pass
         if has_write_flag(oflags):
             process.add_write(opth, e.tstamp, settings.ignored_writes)
 
